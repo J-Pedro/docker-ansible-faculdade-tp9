@@ -1,0 +1,19 @@
+---
+  - hosts: timesheet
+    remote_user: analista
+    become: yes
+    tasks:
+      - name: "Executa o container MySQL"
+        docker_container:
+          name: banco
+          image: mysql:latest
+          env:
+            MYSQL_ROOT_PASSWORD: senha123
+      - name: "Executa o container Apache + PHP"
+        docker_container:
+          name: site
+          image: php:latest
+          links:
+            - "banco:db"
+          ports:
+            - "8080:80"
