@@ -1,0 +1,1 @@
+Utilização do docker e ansible em um projeto da faculdade
